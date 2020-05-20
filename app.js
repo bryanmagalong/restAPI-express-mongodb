@@ -9,6 +9,10 @@ require('dotenv/config');
 const postsRoute = require('./routes/posts');
 
 //== Middlewares
+// Replaces app.use(bodyParser.json())
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+
 // Everytime we go to '/posts', we use postRoutes
 // We can now use multiple routes with '/posts' base url
 // for example: '/posts/specific' -> all you need is to create a route '/specific' in './routes/posts'
@@ -22,13 +26,18 @@ app.get('/', (req, res) => {
 // Connect to DB
 mongoose.connect(
   process.env.DB_CONNECTION,
-  { 
+  {
+    dbName: 'restAPI',
     useUnifiedTopology: true,
     useNewUrlParser: true
-  },
-  () => {
-  console.log('Connected to DB');
-});
+  }
+)
+  .then(() => {
+    console.log('Connected to Database');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // We start listening port 3000
 app.listen(3000);
