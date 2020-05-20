@@ -53,6 +53,25 @@ router.delete('/:postId', async (req, res) => {
   } catch(err) {
     res.json({message: err});
   }
-})
+});
+
+// method: PATCH, route: '/posts/:postId', Update a post
+router.patch('/:postId', async (req, res) => {
+  try{
+    const post = await Post.updateOne(
+      { _id: req.params.postId },
+      {
+        $set: {
+          title: req.body.title,
+          description: req.body.description
+        }
+      }
+    );
+    
+    res.json(post);
+  } catch(err) {
+    res.json({message: err});
+  }
+});
 
 module.exports = router;
