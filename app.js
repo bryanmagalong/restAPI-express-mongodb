@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+const cors = require('cors');
 
 // To access env variables
 require('dotenv/config');
@@ -9,6 +10,8 @@ require('dotenv/config');
 const postsRoute = require('./routes/posts');
 
 //== Middlewares
+// Middleware for cors problems
+app.use(cors());
 // Replaces app.use(bodyParser.json())
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
