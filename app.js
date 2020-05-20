@@ -9,7 +9,7 @@ require('dotenv/config');
 const postsRoute = require('./routes/posts');
 
 //== Middlewares
-// Everytime we go to /posts routes, we use postRoutes
+// Everytime we go to '/posts', we use postRoutes
 // We can now use multiple routes with '/posts' base url
 // for example: '/posts/specific' -> all you need is to create a route '/specific' in './routes/posts'
 app.use('/posts', postsRoute);
